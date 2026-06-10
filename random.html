@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelNest | Random Trip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo"
+          >TravelNest<span>Plan Your Journey</span></a
+        ><button class="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="budget.html">Budget Planner</a></li>
+            <li><a href="random.html" class="active">Random Trip</a></li>
+            <li><a href="mood.html">Travel Mood</a></li>
+            <li><a href="support.html">Support</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="page-section container">
+        <div class="section-header">
+          <h1>Random Trip Generator</h1>
+          <p>Can't decide? Let fate choose your next adventure.</p>
+        </div>
+        <div style="max-width: 500px; margin: 0 auto">
+          <form id="random-form">
+            <div class="form-group">
+              <label class="form-label">Travel Type</label
+              ><select id="travel-type" class="form-select" required>
+                <option value="">Select type...</option>
+                <option value="adventure">Adventure</option>
+                <option value="relaxation">Relaxation</option>
+                <option value="cultural">Cultural</option>
+                <option value="nature">Nature</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Budget Range</label
+              ><select id="budget-range" class="form-select" required>
+                <option value="">Select budget...</option>
+                <option value="low">Low ($0-50/day)</option>
+                <option value="medium">Medium ($50-150/day)</option>
+                <option value="high">High ($150+/day)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              Surprise Me!
+            </button>
+          </form>
+          <div class="random-result" id="random-result">
+            <div id="random-content"></div>
+            <button
+              id="surprise-again"
+              class="btn btn-secondary"
+              style="margin-top: 1.5rem"
+            >
+              Surprise Me Again</button
+            ><button
+              id="add-wishlist"
+              class="btn btn-primary"
+              style="margin-top: 1rem; width: 100%"
+            >
+              Add to Wishlist
+            </button>
+          </div>
+          <div class="saved-list" id="wishlist-section" style="display: none">
+            <h2>My Wishlist</h2>
+            <div id="wishlist-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>Explore</h3>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="destinations.html">Destinations</a></li>
+              <li><a href="budget.html">Budget Planner</a></li>
+              <li><a href="random.html">Random Trip</a></li>
+              <li><a href="mood.html">Travel Mood</a></li>
+              <li><a href="support.html">Support</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>About TravelNest</h3>
+            <p>Your companion for stress-free travel planning.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Newsletter</h3>
+            <form id="newsletter-form" class="newsletter-form">
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Enter your email"
+              ><button type="submit">Subscribe</button>
+            </form>
+            <div class="alert" id="newsletter-alert"></div>
+          </div>
+        </div>
+        <div class="footer-bottom"><p>TravelNest. Built with care.</p></div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,973 @@
+/* ===============================================
+   TRAVELNEST CSS - MAIN STYLESHEET
+   ===============================================
+   This CSS file contains all styling for the TravelNest website.
+   It uses CSS custom properties (variables) for consistent theming
+   and responsive design breakpoints for mobile, tablet, and desktop.
+   =============================================== */
+
+/* DEFINE COLOR AND SPACING VARIABLES
+   These variables make it easy to change colors throughout the entire website
+   by modifying values in one place */
+:root {
+  --bg-main: #ffffff;        /* Main background color (white) */
+  --bg-secondary: #f8f9fa;   /* Secondary background color (light gray) */
+  --text-primary: #2d4a53;   /* Main text color (dark blue-gray) */
+  --accent-primary: #2d4a53; /* Primary accent (dark blue-gray) */
+  --accent-secondary: #2d4a53; /* Secondary accent (dark blue-gray) */
+  --border-light: #afb3b7;   /* Light border color */
+  --shadow-soft: rgba(45, 74, 83, 0.08);   /* Subtle shadow effect */
+  --shadow-medium: rgba(45, 74, 83, 0.15); /* Medium shadow effect */
+  --transition-default: all 0.3s ease;     /* Smooth animation for hover effects */
+  --radius-sm: 8px;   /* Small border radius */
+  --radius-md: 12px;  /* Medium border radius */
+  --radius-lg: 16px;  /* Large border radius */
+}
+/* RESET DEFAULT BROWSER STYLES
+   Remove default margins and padding, use box-sizing for easier layout calculations */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HTML SETTINGS
+   smooth scroll-behavior makes navigation links scroll smoothly to sections */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+/* BODY STYLING
+   Uses flexbox to ensure footer stays at bottom of page
+   Sets default font family and text color for entire document */
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-main);
+  line-height: 1.6;      /* Spacing between lines of text */
+  min-height: 100vh;     /* Full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack header, main, and footer vertically */
+}
+/* HEADING AND TEXT STYLING
+   h1, h2, h3 use elegant serif font with italic styling
+   clamp() makes font sizes responsive between minimum and maximum values */
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 700; /* Bold weight */
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);      /* Scales between 2rem and 3rem based on viewport */
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem); /* Scales between 1.75rem and 2.5rem */
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem); /* Scales between 1.25rem and 1.5rem */
+}
+
+/* PARAGRAPH STYLING
+   Sets text color and margin for spacing between paragraphs */
+p {
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+}
+
+/* LINK STYLING
+   Removes underline by default, adds color transition on hover */
+a {
+  text-decoration: none;
+  color: var(--accent-secondary);
+  transition: var(--transition-default);
+}
+
+a:hover {
+  color: var(--text-primary); /* Darker color on hover for better visibility */
+}
+/* CONTAINER AND LAYOUT CLASSES
+   .container centers content with max-width constraint
+   .page-section adds vertical padding for consistent spacing between sections */
+.container {
+  width: 90%;              /* Takes 90% of viewport width */
+  max-width: 1200px;       /* But never wider than 1200px */
+  margin: 0 auto;          /* Centers container horizontally */
+  padding: 0 1rem;         /* Adds side padding for small screens */
+}
+
+.page-section {
+  padding: 4rem 0;         /* Top and bottom padding for spacing */
+  flex: 1;                 /* Takes up available space (pushes footer down) */
+}
+/* HEADER STYLING
+   Sticky header stays at top when scrolling
+   z-index: 1000 ensures it appears above other content */
+.site-header {
+  background: var(--accent-primary);
+  padding: 1rem 0;
+  position: sticky;        /* Sticks to top on scroll */
+  top: 0;
+  z-index: 1000;          /* Layer above other elements */
+  box-shadow: 0 2px 10px var(--shadow-soft); /* Subtle shadow for depth */
+}
+
+/* HEADER INNER LAYOUT
+   Uses flexbox to position logo, hamburger menu, and nav */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav */
+  align-items: center;
+}
+
+/* LOGO STYLING
+   Large italic serif text with small tagline underneath */
+.logo {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--bg-main);   /* White text */
+  font-weight: 700;
+}
+
+/* LOGO TAGLINE
+   Small text display below main logo text */
+.logo span {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.9rem;
+  display: block;
+  color: var(--border-light);
+  letter-spacing: 2px;    /* Increased spacing for tagline */
+}
+/* NAVIGATION LINKS STYLING
+   Flexbox layout with gaps between items
+   ::after pseudo-element creates animated underline on hover */
+.nav-links {
+  display: flex;
+  list-style: none;  /* Remove bullet points */
+  gap: 2rem;         /* Spacing between nav items */
+}
+
+/* NAVIGATION LINK STYLING
+   Uses ::after for underline animation effect on hover/active */
+.nav-links a {
+  color: var(--bg-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;  /* Required for ::after positioning */
+  padding: 0.5rem 0;
+}
+
+/* ANIMATED UNDERLINE
+   Starts at 0 width, expands to 100% on hover/active state */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;            /* Hidden by default */
+  height: 2px;
+  background: var(--bg-main);
+  transition: var(--transition-default); /* Smooth width animation */
+}
+
+/* Show underline on hover or active state */
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;  /* Expand to full width */
+}
+/* HAMBURGER MENU (Mobile Navigation)
+   Three horizontal lines that transform into X when menu is open
+   Hidden on desktop, shown on mobile via media query */
+.hamburger {
+  display: none;         /* Hidden on desktop */
+  flex-direction: column;
+  gap: 5px;
+  background: none;      /* No background */
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* HAMBURGER MENU LINES
+   Three spans that transform into X shape */
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background: var(--bg-main);
+  transition: var(--transition-default);
+}
+
+/* ACTIVE STATE: First line rotates up (45 degrees)
+   transform-origin at center, translates to connect with middle point */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+/* ACTIVE STATE: Middle line fades out */
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+/* ACTIVE STATE: Third line rotates down (-45 degrees)
+   Creates the X shape when combined with first line */
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+/* FOOTER STYLING
+   Dark footer at bottom of page with white text
+   Uses margin-top: auto to push footer to bottom */
+.site-footer {
+  background: var(--accent-primary);
+  color: var(--bg-main);
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;  /* Pushes footer to bottom of page */
+}
+
+/* FOOTER GRID LAYOUT
+   Uses CSS Grid with auto-fit for responsive columns */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* FOOTER SECTION HEADINGS
+   Italic serif font for consistent styling */
+.footer-section h4 {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+/* FOOTER LINKS LIST
+   Removes bullets and adds spacing between links */
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+/* FOOTER LINK STYLING
+   Lighter color than main nav links */
+.footer-links a {
+  color: var(--border-light);
+  font-size: 0.9rem;
+}
+/* NEWSLETTER FORM STYLING
+   Simple form layout with column direction
+   Input and button styled for consistency */
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* NEWSLETTER INPUT FIELD
+   Transparent background with border */
+.newsletter-form input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1); /* Slight transparency */
+  color: var(--bg-main);
+}
+
+/* NEWSLETTER SUBSCRIBE BUTTON
+   Colored button that inverts colors on hover */
+.newsletter-form button {
+  padding: 0.75rem;
+  background: var(--accent-secondary);
+  color: var(--bg-main);
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.newsletter-form button:hover {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+/* FOOTER BOTTOM
+   Border-top separator and centered copyright text */
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
+/* BUTTON STYLING
+   Two button variants: primary (filled) and secondary (outlined)
+   Common properties for all buttons */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition-default);
+  border: 2px solid transparent;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* PRIMARY BUTTON: Filled style
+   Solid background color, becomes transparent on hover */
+.btn-primary {
+  background: var(--accent-secondary);
+  color: var(--bg-main);
+  border-color: var(--accent-secondary);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--accent-secondary);
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+/* SECONDARY BUTTON: Outlined style
+   Transparent background, becomes filled on hover */
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+}
+
+.btn-secondary:hover {
+  background: var(--accent-secondary);
+  color: var(--bg-main);
+}
+/* CARDS GRID LAYOUT
+   Responsive grid that stacks on mobile, 2 columns on tablet, 3 on desktop */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;  /* 1 column by default (mobile) */
+  gap: 1.5rem;
+}
+
+/* CARD COMPONENT
+   Individual card with image, content, and hover effects
+   Uses flexbox to distribute content vertically */
+.card {
+  background: var(--bg-main);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;  /* Hide overflow for rounded corners */
+  transition: var(--transition-default);
+  box-shadow: 0 2px 8px var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  height: 100%;      /* Full height for grid alignment */
+}
+
+/* CARD HOVER STATE
+   Lifts card up, increases shadow, changes border color */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-medium);
+  border-color: var(--accent-secondary);
+}
+
+/* CARD IMAGE
+   Full width, fixed height, cover to maintain aspect ratio */
+.card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;  /* Crop to fit without stretching */
+}
+
+/* CARD CONTENT
+   Padding for internal content, flexbox to push button down */
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;  /* Takes remaining space */
+}
+
+/* CARD TITLE AND SUBTITLE
+   Heading and additional info */
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-subtitle {
+  color: var(--accent-secondary);
+  font-size: 0.9rem;
+}
+/* FILTER BAR
+   Horizontal layout for search and filter controls */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;  /* Wrap on small screens */
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* FORM ELEMENTS: Input, Select, Textarea
+   Common styling for all form fields */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* FORM FOCUS STATE
+   Highlight border when focused */
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+}
+
+/* FORM GROUP
+   Wrapper for label + input with spacing */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* FORM LABEL
+   Bold label for form fields */
+.form-label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+/* MODAL OVERLAY
+   Fixed full-screen semi-transparent background
+   Initially invisible (opacity: 0, visibility: hidden) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(45, 74, 83, 0.6);  /* Dark semi-transparent overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;                      /* Above header */
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-default);
+}
+
+/* ACTIVE MODAL STATE
+   Shows modal by changing opacity and visibility */
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* MODAL CONTENT BOX
+   Centered white box with rounded corners
+   Scales down slightly, animates to scale 1 when active */
+.modal-content {
+  background: var(--bg-main);
+  border-radius: var(--radius-md);
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;      /* Scrollable if content too long */
+  position: relative;
+  transform: scale(0.9); /* Start smaller */
+  transition: var(--transition-default);
+}
+
+/* Modal scales to full size when active */
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+/* MODAL CLOSE BUTTON
+   X button in top-right corner */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* MODAL BODY
+   Content area with padding */
+.modal-body {
+  padding: 2rem;
+}
+/* DATA TABLE STYLING
+   Full-width table with borders and padding */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+/* TABLE HEADER AND DATA CELLS
+   Padding, left-aligned text, bottom borders */
+.data-table th,
+.data-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* BUDGET AND RANDOM RESULT CONTAINERS
+   Light background boxes for displaying calculation results
+   Hidden by default with display: none */
+.budget-result,
+.random-result {
+  background: rgba(105, 129, 141, 0.03);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  display: none;  /* Hidden until calculation is done */
+}
+
+/* SHOW RESULT CLASS
+   Displays result and adds fade-in animation */
+.budget-result.show,
+.random-result.show {
+  display: block;
+  animation: fadeInUp 0.5s ease;
+}
+
+/* LARGE BUDGET TOTAL DISPLAY
+   Responsive font size for big budget number */
+.budget-total {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  margin: 1rem 0;
+}
+/* PROGRESS CONTAINER AND BAR
+   Outer container with inner filled bar
+   Bar animates width over 1 second on budget calculation */
+.progress-container {
+  width: 100%;
+  height: 12px;
+  background: var(--border-light);  /* Light background */
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--accent-secondary);  /* Colored fill */
+  width: 0;  /* Starts at 0 */
+  transition: width 1s ease;  /* Animates to final width */
+}
+
+/* STATUS TAG STYLING
+   Small colored badge for low/moderate/luxury budgets
+   Different background colors for each status */
+.status-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;      /* Fully rounded edges */
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-low {
+  background: rgba(105, 129, 141, 0.1);
+  color: var(--accent-secondary);
+}
+
+.status-moderate {
+  background: rgba(255, 193, 7, 0.15);
+  color: #b38600;
+}
+
+.status-luxury {
+  background: rgba(45, 74, 83, 0.1);
+  color: var(--text-primary);
+}
+/* MOOD GRID LAYOUT
+   Responsive grid for ambient sound cards
+   1 column mobile, 2 tablet, 3 desktop */
+.mood-grid {
+  display: grid;
+  grid-template-columns: 1fr;  /* 1 column by default */
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+/* SOUND TOGGLE BUTTON
+   Interactive button to play/pause ambient sounds
+   Shows icon and description */
+.sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-main);
+  border: 2px solid var(--border-light);
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ACTIVE SOUND TOGGLE
+   Highlighted when sound is playing */
+.sound-toggle.active {
+  border-color: var(--accent-secondary);
+  background: rgba(105, 129, 141, 0.08);
+}
+
+/* SOUND ICON STYLING
+   Circular background for emoji icon */
+.sound-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  background: var(--shadow-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* VISITED TRACKER DISPLAY
+   Horizontal flex layout for destination tags */
+.visited-tracker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* VISITED TAG STYLING
+   Colored badge for each visited destination */
+.visited-tag {
+  padding: 0.5rem 1rem;
+  background: var(--accent-secondary);
+  color: var(--bg-main);
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+/* SAVED LIST STYLING
+   Container for saved budgets, wishlists, etc */
+.saved-list {
+  margin-top: 2rem;
+}
+
+/* SAVED ITEM STYLING
+   Individual item in saved list with flex layout
+   Shows info on left, delete button on right */
+.saved-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+/* CHECKBOX GROUP STYLING
+   Horizontal layout for radio buttons or checkboxes */
+.checkbox-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+/* ACCORDION STYLING
+   Expandable sections for FAQ
+   Each item opens/closes to show/hide content */
+.accordion-item {
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+
+/* ACCORDION HEADER (Click area)
+   Full-width button with flex layout
+   Shows + icon that changes to − when expanded */
+.accordion-header {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--bg-main);
+  border: none;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ACCORDION ICON: + (Plus sign)
+   Changes to − (minus sign) when active */
+.accordion-header::after {
+  content: "+";
+  font-size: 1.25rem;
+  color: var(--accent-secondary);
+}
+
+.accordion-item.active .accordion-header::after {
+  content: "−";  /* Minus sign for expanded state */
+}
+
+/* ACCORDION BODY (Hidden content)
+   Starts with 0 height, expands to 300px when active
+   max-height creates smooth opening animation */
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1.25rem;
+}
+
+/* ACCORDION BODY WHEN ACTIVE
+   Expands to show content with smooth animation */
+.accordion-item.active .accordion-body {
+  max-height: 300px;
+  padding-bottom: 1.25rem;
+}
+/* ALERT MESSAGES STYLING
+   Notifications for success or error messages
+   Initially hidden with display: none */
+.alert {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: none;  /* Hidden by default */
+}
+
+/* SHOW ALERT CLASS
+   Displays alert with fade-in animation */
+.alert.show {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+/* SUCCESS ALERT STYLING
+   Green-ish color for successful operations */
+.alert-success {
+  background: rgba(105, 129, 141, 0.1);
+  border: 1px solid var(--accent-secondary);
+  color: var(--text-primary);
+}
+
+/* ERROR ALERT STYLING
+   Red color for error messages */
+.alert-error {
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+/* HERO SECTION STYLING
+   Large banner section on homepage with text and image
+   Uses CSS Grid for responsive layout */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr;  /* Single column on mobile */
+  gap: 2rem;
+  align-items: center;
+  min-height: 80vh;  /* Takes most of viewport */
+}
+
+/* HERO CONTENT ORDER (Mobile first)
+   Content shows below image on mobile */
+.hero-content {
+  order: 2;
+}
+
+/* HERO IMAGE ORDER AND STYLING
+   Image shows above on mobile, right on desktop
+   Rounded corners and overflow hidden for styling */
+.hero-image {
+  order: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* HERO QUOTE STYLING
+   Italic serif text that rotates quotes */
+.hero-quote {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  margin-bottom: 1.5rem;
+  min-height: 100px;  /* Reserved space to prevent layout shift */
+}
+
+/* DESTINATION OF THE DAY SECTION
+   Featured section with rounded box styling */
+.dest-day-section {
+  background: rgba(105, 129, 141, 0.03);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  border: 1px solid var(--border-light);
+}
+
+/* DESTINATION OF THE DAY LABEL
+   Small uppercase text with letter-spacing */
+.dest-day-label {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+/* SCROLL REVEAL ANIMATION
+   Elements start invisible and slide up as they enter viewport
+   JavaScript uses IntersectionObserver to trigger this */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);  /* Starts 30px below */
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* REVEALED STATE
+   Triggered when element enters viewport via JS */
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);  /* Moves back to normal position */
+}
+/* ANIMATION DEFINITIONS
+   CSS keyframe animations used throughout the site */
+
+/* FADEINUP ANIMATION
+   Fades in while sliding up, used for result displays */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FADEIN ANIMATION
+   Simple fade in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* PULSE ANIMATION
+   Gentle scaling animation, used on "Surprise Again" button
+   Scales slightly up and down repeatedly */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);  /* Slight enlargement */
+  }
+}
+
+/* PULSE ANIMATION APPLICATION
+   Applied to surprise button for attention */
+#surprise-again {
+  animation: pulse 2s infinite;
+}
+/* ===============================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ===============================================
+   Media queries ensure website looks good on different screen sizes
+   Mobile first approach: styles for mobile, then enhance for larger screens
+   =============================================== */
+
+/* TABLET AND UP (768px and wider)
+   Adjust layouts for more screen space */
+@media (min-width: 768px) {
+  /* HERO SECTION: Two columns instead of stacked */
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  /* Content on left, image on right on tablet+ */
+  .hero-content {
+    order: 1;
+  }
+  .hero-image {
+    order: 2;
+  }
+  /* CARDS AND MOOD GRIDS: Two columns */
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mood-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP AND UP (1024px and wider)
+   Full three-column layouts for grids */
+@media (min-width: 1024px) {
+  /* CARDS GRID: Three columns for better use of space */
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /* MOOD GRID: Three columns for ambient sounds */
+  .mood-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* MOBILE SCREENS (767px and below)
+   Hide desktop nav, show hamburger menu */
+@media (max-width: 767px) {
+  /* Show hamburger menu button */
+  .hamburger {
+    display: flex;
+  }
+  /* MOBILE NAV: Slides in from right side
+     Takes 70% of screen width, fixed position */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;        /* Start hidden off-screen */
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;       /* Full viewport height */
+    background: var(--accent-primary);
+    flex-direction: column;
+    padding: 5rem 2rem 2rem;  /* Top padding for header space */
+    transition: right 0.3s;   /* Smooth slide animation */
+    z-index: 999;             /* Above content but below modal */
+  }
+  /* MOBILE NAV ACTIVE: Slides in from right */
+  .nav-links.active {
+    right: 0;  /* Move into view */
+  }
+}
